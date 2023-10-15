@@ -71,7 +71,25 @@
                         </button>
                     </h5>
                     <hr>
-                    <p class="card-text">Selamat datang kembali di Forum Terbuka.</p>
+                    <p class="card-text">
+                        Selamat datang kembali di Forum Terbuka.
+                        <?php 
+                            if (!session('is_login')) { ?>
+                                Silahkan masuk untuk melihat dan berdisuksi di forum ini.
+                        <?php } ?>
+
+                        <?php
+                            if (session('is_login')) { ?>
+                                <div class="card" style="width: 18rem;">
+                                  <!-- <img src="..." class="card-img-top" alt="..."> -->
+                                  <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                  </div>
+                                </div>
+                        <?php } ?>
+                    </p>
                   </div>
                 </div>
             </div>

@@ -11,7 +11,7 @@ class Backend extends RestController {
 
         # periksa apakah ada session is_login 
         # jika tidak ada redirect ke base_url
-        if (!session('is_login')) {
+        if (!session('is_login') && session('user_role') !== "admin") {
             redirect(base_url());
         }
     }

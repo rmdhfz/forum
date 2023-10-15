@@ -8,9 +8,6 @@ class Frontend extends RestController {
 
     function __construct(){
         parent::__construct();
-        if (session('is_login')) {
-            redirect(base_url('dashboard'));
-        }
     }
     
     function index_get()
@@ -38,6 +35,7 @@ class Frontend extends RestController {
         $check = $this->db->query("
             SELECT 
             u.id, 
+            r.name as role,
             u.nis, 
             u.name, 
             u.email, 
@@ -57,10 +55,12 @@ class Frontend extends RestController {
 
             FROM 
                 users u 
+                INNER JOIN role r ON u.role_id = r.id
                 INNER JOIN access a ON a.users_id = u.id
             WHERE 
                 u.email = ? AND
                 u.is_deleted IS NULL AND
+                r.is_deleted IS NULL AND
                 a.is_deleted IS NULL", [$email]);
         if ($check->num_rows() == 0) {
             # email tidak ditemukan
@@ -87,6 +87,7 @@ class Frontend extends RestController {
             'is_login'                      =>  1,
             'last_login'                    =>  date('d-m-Y h:i:s'),
             'user_id'                       =>  $db->id,
+            'user_role'                     =>  strtolower($db->role),
             'user_name'                     =>  $db->name,
             'user_email'                    =>  $db->email,
             'user_nis'                      =>  $db->nis,
@@ -110,9 +111,15 @@ class Frontend extends RestController {
         # buat sesi
         $this->session->set_userdata($data);
 
+        # periksa role
+        $redirect = base_url('dashboard');
+        if ($db->role === "Siswa") {
+            $redirect = base_url();
+        }
+
         # kirim respon berhasil
         success('Selamat, login berhasil', [
-            'redirect'  =>  base_url('dashboard')
+            'redirect'  =>  $redirect
         ]);
     }
 }
