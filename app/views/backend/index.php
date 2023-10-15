@@ -195,6 +195,11 @@
                                 </a>
                                 <ul class="submenu" id="submenu">
                                     <li class="sidebar-item ms-3">
+                                        <a class="sidebar-link" href="master/role" aria-expanded="false">
+                                            <span class="hide-menu">Data Role</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item ms-3">
                                         <a class="sidebar-link" href="master/users" aria-expanded="false">
                                             <span class="hide-menu">Data Pengguna</span>
                                         </a>
