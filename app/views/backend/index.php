@@ -115,6 +115,9 @@
                 beforeSend: function(xhr, settings) {
                     xhr.setRequestHeader('X-Request-Time', get_timestamp());
                     xhr.setRequestHeader('<?php echo $this->security->get_csrf_token_name(); ?>', "<?php echo $this->security->get_csrf_hash() ?>");
+                    if (!settings.contentType) {
+                        return true;
+                    }
                     if (settings.data) {
                         settings.data += '&<?= $this->security->get_csrf_token_name() ?>=' + "<?php echo $this->security->get_csrf_hash() ?>";
                     } else {
@@ -194,6 +197,11 @@
                                     <li class="sidebar-item ms-3">
                                         <a class="sidebar-link" href="master/users" aria-expanded="false">
                                             <span class="hide-menu">Data Pengguna</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item ms-3">
+                                        <a class="sidebar-link" href="master/access" aria-expanded="false">
+                                            <span class="hide-menu">Data Akses Pengguna</span>
                                         </a>
                                     </li>
                                 </ul>
