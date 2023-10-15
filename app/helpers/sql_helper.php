@@ -168,7 +168,7 @@ if ( ! function_exists('create')) {
             }
         }
 
-        $data['created_by'] = session('employee_name');
+        $data['created_by'] = session('user_name');
         $ci = &get_instance();
         $ci->load->database();
         $ci->db->trans_start();
@@ -253,7 +253,7 @@ if ( ! function_exists('update')) {
         }
 
         $data['updated_at'] = date('Y-m-d h:i:s');
-        $data['updated_by'] = session('employee_name');
+        $data['updated_by'] = session('user_name');
         $ci = &get_instance();
         $ci->load->database();
         $ci->db->trans_start();
@@ -300,7 +300,7 @@ if ( ! function_exists('delete')) {
         $delete = $ci->db->update($table, [
             'is_deleted'    =>  1,
             'deleted_at'    =>  date('Y-m-d h:i:s'),
-            'deleted_by'    =>  session('employee_name'),
+            'deleted_by'    =>  session('user_name'),
         ], $where);
 
         if (!$delete) {
@@ -341,7 +341,7 @@ if ( ! function_exists('approve')) {
         $delete = $ci->db->update($table, [
             'is_approved'   =>  1,
             'approved_at'   =>  date('Y-m-d h:i:s'),
-            'approved_by'   =>  session('employee_name'),
+            'approved_by'   =>  session('user_name'),
         ], $where);
 
         if (!$delete) {
@@ -382,7 +382,7 @@ if ( ! function_exists('reject')) {
         $delete = $ci->db->update($table, [
             'is_approved'       =>  0,
             'rejected_at'       =>  date('Y-m-d h:i:s'),
-            'rejected_by'       =>  session('employee_name'),
+            'rejected_by'       =>  session('user_name'),
         ], $where);
 
         if (!$delete) {
@@ -447,7 +447,7 @@ if ( ! function_exists('terminate')) {
         $terminate = $ci->db->update('orders', [
             'is_terminate'      => true,
             'terminated_at'     => date('Y-m-d h:i:s'),
-            'terminated_by'     => session('employee_name'),
+            'terminated_by'     => session('user_name'),
         ], $where);
 
         if (!$terminate) {
@@ -526,7 +526,7 @@ if ( ! function_exists('open_ticket')) {
         $history = $ci->db->insert('ticket_status_history', [
             'id_ticket'     =>  $id,
             'status'        =>  'open',
-            'created_by'    =>  session('employee_name'),
+            'created_by'    =>  session('user_name'),
         ]);
 
         if (!$history) {
@@ -570,7 +570,7 @@ if ( ! function_exists('hold_ticket')) {
         $history = $ci->db->insert('ticket_status_history', [
             'id_ticket'     =>  $id,
             'status'        =>  'hold',
-            'created_by'    =>  session('employee_name'),
+            'created_by'    =>  session('user_name'),
         ]);
 
         if (!$history) {
@@ -605,7 +605,7 @@ if ( ! function_exists('close_ticket')) {
         $close = $ci->db->update('ticket', [
             'status'    => 'close',
             'close_at'  =>  date('Y-m-d h:i:s'),
-            'close_by'  =>  session('employee_name'),
+            'close_by'  =>  session('user_name'),
         ], $where);
 
         if (!$close) {
@@ -616,7 +616,7 @@ if ( ! function_exists('close_ticket')) {
         $history = $ci->db->insert('ticket_status_history', [
             'id_ticket'     =>  $id,
             'status'        =>  'close',
-            'created_by'    =>  session('employee_name'),
+            'created_by'    =>  session('user_name'),
         ]);
 
         if (!$history) {
