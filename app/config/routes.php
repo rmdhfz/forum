@@ -8,4 +8,5 @@ $route = [
 
     # dashboard
     'dashboard'             =>  'Backend',
+    'logout'                =>  'Backend/logout',
 ];
