@@ -13,16 +13,20 @@ class UsersModel extends CI_Model {
     {
         $data = $this->db->query("
             SELECT
-            id,
-            nis,
-            name,
-            email,
-            profile,
-            is_blocked as status
+            u.id,
+            u.nis,
+            r.name as role,
+            u.name,
+            u.email,
+            u.profile,
+            u.is_blocked as status
 
-            FROM users
+            FROM 
+                users u
+            INNER JOIN role r ON u.role_id = r.id
             WHERE
-            is_deleted IS NULL
+                u.is_deleted IS NULL AND
+                r.is_deleted IS NULL
         ");
         
         if ($data->num_rows() == 0) {
@@ -38,6 +42,7 @@ class UsersModel extends CI_Model {
             $result['data'][$key] = [
                 $no,
                 $value->nis,
+                $value->role,
                 $value->name,
                 $value->email,
                 $profile,
