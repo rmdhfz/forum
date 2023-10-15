@@ -61,7 +61,9 @@ class Frontend extends RestController {
                 u.email = ? AND
                 u.is_deleted IS NULL AND
                 r.is_deleted IS NULL AND
-                a.is_deleted IS NULL", [$email]);
+                a.is_deleted IS NULL AND
+                u.is_blocked = 0", [$email]);
+
         if ($check->num_rows() == 0) {
             # email tidak ditemukan
             # tapi berikan pesan general saja.
