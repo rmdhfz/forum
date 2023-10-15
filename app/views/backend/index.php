@@ -220,13 +220,13 @@
                                         </a>
                                     </li>
                                     <li class="sidebar-item ms-3">
-                                        <a class="sidebar-link" href="content/discuss" aria-expanded="false">
-                                            <span class="hide-menu">Data Diskusi</span>
+                                        <a class="sidebar-link" href="content/post" aria-expanded="false">
+                                            <span class="hide-menu">Data Postingan</span>
                                         </a>
                                     </li>
                                     <li class="sidebar-item ms-3">
-                                        <a class="sidebar-link" href="content/announcement" aria-expanded="false">
-                                            <span class="hide-menu">Data Pengumuman</span>
+                                        <a class="sidebar-link" href="content/comment" aria-expanded="false">
+                                            <span class="hide-menu">Data Komentar</span>
                                         </a>
                                     </li>
                                 </ul>
