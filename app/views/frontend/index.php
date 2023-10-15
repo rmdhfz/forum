@@ -12,15 +12,16 @@
 
     <meta property="og:title" content="Forum Open Source - Komunitas Pengembang Terbuka">
     <meta property="og:description" content="Bergabunglah dengan komunitas pengembang open source, bagikan ide, dan pelajari lebih banyak tentang perangkat lunak sumber terbuka di Forum Open Source kami.">
-    <meta property="og:image" content="<?php echo base_url('logo.jpg') ?>">
-    <meta property="og:url" content="<?php echo base_url(); ?>">
+    <meta property="og:image" content="assets/images/favicon.ico">
+    <meta property="og:url" content="/">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Forum Open Source - Komunitas Pengembang Terbuka">
     <meta name="twitter:description" content="Bergabunglah dengan komunitas pengembang open source, bagikan ide, dan pelajari lebih banyak tentang perangkat lunak sumber terbuka di Forum Open Source kami.">
-    <meta name="twitter:image" content="<?php echo base_url('logo.jpg') ?>">
+    <meta name="twitter:image" content="assets/images/favicon.ico">
 
     <link rel="canonical" href="<?php echo base_url(); ?>">
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="assets/images/favicon.ico">
+    <link rel="icon" type="image/png" href="assets/images/favicon.ico">
 
     <!-- bootstrap 5.0.2 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
