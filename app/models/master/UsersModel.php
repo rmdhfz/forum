@@ -34,7 +34,7 @@ class UsersModel extends CI_Model {
         foreach ($data->result() as $key => $value) { $no++;
             $option  = options($value->id);
             $profile = $value->profile == null ? "-" : "<img draggable='false' src='$value->profile' class='img-thumbnail' style='width: 100px; height: 100px;' alt='profile'>";
-            $status  = $value->status == 0 ? "<span class='badge bg-primary'>Aktif</span>" : "<span class='badge bg-danger'>Diblokir</span>";
+            $status  = $value->status == 0 ? "<span class='badge bg-danger'>Diblokir</span>" : "<span class='badge bg-primary'>Aktif</span>";
             $result['data'][$key] = [
                 $no,
                 $value->nis,
