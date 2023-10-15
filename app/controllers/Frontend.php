@@ -35,7 +35,7 @@ class Frontend extends RestController {
         $this->load->database();
         
         # cek data users berdasarkan email
-        $check = $this->db->query("SELECT id, name, email, password FROM users WHERE email = ? AND is_deleted IS NULL", [$email]);
+        $check = $this->db->query("SELECT id, nis, name, email, profile, password FROM users WHERE email = ? AND is_deleted IS NULL", [$email]);
         if ($check->num_rows() == 0) {
             # email tidak ditemukan
             # tapi berikan pesan general saja.
@@ -61,7 +61,9 @@ class Frontend extends RestController {
             'is_login'      =>  1,
             'last_login'    =>  date('d-m-Y h:i:s'),
             'user_name'     =>  $db->name,
-            'user_email'    =>  $db->email
+            'user_email'    =>  $db->email,
+            'user_nis'      =>  $db->nis,
+            'user_profile'  =>  $db->profile
         ];
 
         # load library session
