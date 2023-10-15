@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <base href="<?php echo base_url(); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Selamat Datang | Forum Open Source - Komunitas Pengembang Terbuka</title>
     
@@ -137,5 +138,17 @@
       </div>
     </div>
     <!-- modal login -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#formlogin").submit(function(event) {
+                event.preventDefault();
+                $.post('verify', $(this).serialize()).done((res,xhr,status) => {
+                    if (res && res.status) {
+                        window.location = res.data.redirect;
+                    }
+                })
+            });
+        });
+    </script>
 </body>
 </html>
