@@ -13,6 +13,9 @@
                             <h6 class="fw-semibold mb-0">NIS</h6>
                         </th>
                         <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Role</h6>
+                        </th>
+                        <th class="border-bottom-0">
                             <h6 class="fw-semibold mb-0">Nama</h6>
                         </th>
                         <th class="border-bottom-0">
@@ -46,9 +49,15 @@
                         <input type="hidden" name="id" id="id" />
                         <input type="hidden" name="rt" value="<?php echo time();?>" />
                         <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash() ?>">
-                        <div class="mb-3">
-                            <label for="nis" class="form-label">Nomor Induk</label>
-                            <input type="text" class="form-control" id="nis" name="nis" required placeholder="nomor induk" minlength="6" maxlength="15" pattern="[0-9\s]{6,15}" />
+                        <div class="row">
+                            <div class="mb-3 col-sm-6">
+                                <label for="role" class="form-label">Role</label>
+                                <select id="role" name="role" class="form-control" required></select>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label for="nis" class="form-label">Nomor Induk</label>
+                                <input type="text" class="form-control" id="nis" name="nis" required placeholder="nomor induk" minlength="6" maxlength="15" pattern="[0-9\s]{6,15}" />
+                            </div>
                         </div>
                         <div class="row">
                             <div class="mb-3 col-sm-6">
@@ -93,6 +102,7 @@
     $(document).ready(function () {
         let table,
             form = $("#form"),
+            role = $("#role"),
             modal = $("#modal");
 
         table = $("#table").DataTable({
@@ -106,6 +116,20 @@
             },
             responsive: "true",
         });
+
+        async function data_role() {
+            await $.get("master/role/data").done((res, xhr, status) => {
+                if (res && res.status) {
+                    const data = res.data;
+                    role.empty();
+                    role.append(`<option value='' selected disabled> Pilih Role </option>`);
+                    $.each(data, function (index, val) {
+                        role.append(`<option value='${val.id}'>${val.name}</option>`);
+                    });
+                }
+            });
+        }
+        data_role();
 
         form.submit(function (event) {
             event.preventDefault();
