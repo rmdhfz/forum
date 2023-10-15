@@ -207,6 +207,31 @@
                                 </ul>
                             </li>
                             <li class="sidebar-item">
+                                <a class="sidebar-link" href="javascript:void(0)" id="submenu-toggle" onclick="ToggleSubMenu(this)">
+                                    <span>
+                                        <i class="ti ti-clipboard" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="hide-menu">Data Konten</span>
+                                </a>
+                                <ul class="submenu" id="submenu">
+                                    <li class="sidebar-item ms-3">
+                                        <a class="sidebar-link" href="content/category" aria-expanded="false">
+                                            <span class="hide-menu">Data Kategori</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item ms-3">
+                                        <a class="sidebar-link" href="content/discuss" aria-expanded="false">
+                                            <span class="hide-menu">Data Diskusi</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item ms-3">
+                                        <a class="sidebar-link" href="content/announcement" aria-expanded="false">
+                                            <span class="hide-menu">Data Pengumuman</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-item">
                                 <a class="sidebar-link" href="<?php echo base_url('logout');?>" aria-expanded="false">
                                     <span>
                                         <i class="ti ti-logout"></i>
