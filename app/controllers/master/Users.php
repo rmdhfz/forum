@@ -47,6 +47,7 @@ class Users extends RestController {
         if (!verify_email($email)) {
             badrequest("Format email tidak valid");
         }
+        $role       = $this->post('role');
         $nis        = $this->post('nis');
         $name       = $this->post('name');
         $password   = $this->post('password');
@@ -64,6 +65,7 @@ class Users extends RestController {
         }
 
         $data = [
+            'role_id'       =>  $role,
             'nis'           =>  $nis,
             'name'          =>  $name,
             'email'         =>  $email,
@@ -105,6 +107,7 @@ class Users extends RestController {
         if (!verify_email($email)) {
             badrequest("Format email tidak valid");
         }
+        $role       = $this->post('role');
         $nis        = $this->post('nis');
         $name       = $this->post('name');
         $password   = $this->post('password');
@@ -122,6 +125,7 @@ class Users extends RestController {
         }
 
         $data = [
+            'role_id'       =>  $role,
             'nis'           =>  $nis,
             'name'          =>  $name,
             'email'         =>  $email,
