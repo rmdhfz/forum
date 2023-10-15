@@ -65,10 +65,19 @@
                 <div class="card">
                   <div class="card-body">
                     <h5 class="card-title">
-                        Forum Terbuka | 
-                        <button type="button" class="btn btn-flat btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modallogin">
-                            <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Masuk
-                        </button>
+                        Forum Terbuka 
+                        <?php 
+                            if (!session('is_login')) { ?>
+                                | 
+                                <button type="button" class="btn btn-flat btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modallogin">
+                                    <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Masuk
+                                </button>
+                        <?php } ?>
+
+                        <?php 
+                            if (session('is_login')) { ?>
+                                <a href="<?php echo base_url('logout') ?>" style="float: right;">Keluar</a>
+                        <?php } ?>
                     </h5>
                     <hr>
                     <p class="card-text">
@@ -80,41 +89,21 @@
 
                         <?php
                             if (session('is_login')) { ?>
-                                <div class="card" style="width: 18rem;">
-                                  <!-- <img src="..." class="card-img-top" alt="..."> -->
-                                  <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                  </div>
-                                </div>
+                                <div id="content"></div>
                         <?php } ?>
                     </p>
                   </div>
                 </div>
             </div>
             <div class="col-sm-4 mt-4">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Pengumuman</h5><hr>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  </div>
-                </div>
+                <h5>Pengumuman Terbaru</h5> <hr>
+                <div id="announcement"></div>
             </div>
             <div class="col-sm-8"></div>
             <div class="col-sm-4 mt-4">
                 <div class="card">
                   <div class="card-body">
                     <h5 class="card-title">Topik Terbaru</h5><hr>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  </div>
-                </div>
-            </div>
-            <div class="col-sm-8"></div>
-            <div class="col-sm-4 mt-4">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Bagian Iklan</h5><hr>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                   </div>
                 </div>
@@ -167,6 +156,64 @@
                     }
                 })
             });
+
+            async function contents()
+            {
+                await $.get('api/content').done((res,xhr,status) => {
+                    if (res && res.status) {
+                        const data = res.data;
+                        $.each(data, function(index, val) {
+                            if (val.id !== null) {
+                                $("#content").append(`
+                                    <div class="card" style="width: 18rem;">
+                                      <div class="card-body">
+                                        <h5 class="card-title">${val.title}</h5> <hr>
+                                        
+                                        <small> ${val.created_by} - ${val.created_at} </small> <br> <br>
+
+                                        <p class="card-text">${val.content}</p> <hr>
+                                        <a href="post/${val.id}/${val.title.replace(/ /g, '-').toLowerCase()}" class="btn btn-primary" style="float: right;"> 
+                                            ${val.totalcomment} Komentar 
+                                        </a>
+                                        <p>${val.views} tayangan</p>
+                                      </div>
+                                    </div>
+                                `);   
+                            }
+                        });
+                    }
+                })
+            }
+            contents();
+
+            async function announcement()
+            {
+                await $.get('api/announcement').done((res,xhr,status) => {
+                    if (res && res.status) {
+                        const data = res.data;
+                        $.each(data, function(index, val) {
+                            if (val.id !== null) {
+                                $("#announcement").append(`
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <h5 class="card-title">${val.title}</h5> <hr>
+                                        
+                                        <small> ${val.created_by} - ${val.created_at} </small> <br> <br>
+
+                                        <p class="card-text">${val.content}</p> <hr>
+                                        <a href="post/${val.id}/${val.title.replace(/ /g, '-').toLowerCase()}" class="btn btn-primary" style="float: right;"> 
+                                            Baca Pengumuman
+                                        </a>
+                                        <p>${val.views} tayangan</p>
+                                      </div>
+                                    </div>
+                                `);   
+                            }
+                        });
+                    }
+                })
+            }
+            announcement();
         });
     </script>
 </body>
