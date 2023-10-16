@@ -274,7 +274,7 @@
                                             $user_profile = base_url('assets/images/profile/user-1.jpg');
                                         }
                                      ?>
-                                        <img loading="lazy" draggable="false" src="<?php echo $user_profile; ?>" alt="" width="35" height="35" class="rounded-circle" />
+                                        <img loading="lazy" draggable="false" src="<?php echo $user_profile; ?>" alt="profile" width="35" height="35" class="rounded-circle" />
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                                         <div class="message-body">

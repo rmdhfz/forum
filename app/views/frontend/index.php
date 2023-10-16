@@ -99,16 +99,14 @@
                 <h5>Pengumuman Terbaru</h5> <hr>
                 <div id="announcement"></div>
             </div>
-            <div class="col-sm-8"></div>
-            <div class="col-sm-4 mt-4">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Topik Terbaru</h5><hr>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  </div>
-                </div>
-                <div class="mt-2">
-                    <small>SMK Nusantara &copy; 2023</small>
+            <div class="row">
+                <div class="offset-sm-8 col-sm-4 mt-4">
+                    <h5>Topik Terbaru</h5>
+                    <hr />
+                    <div id="newtopics"></div>
+                    <div class="mt-2">
+                        <small>SMK Nusantara &copy; 2023</small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -214,6 +212,34 @@
                 })
             }
             announcement();
+
+            async function newtopics() {
+                    await $.get("api/content/newtopics").done((res, xhr, status) => {
+                        if (res && res.status) {
+                            const data = res.data;
+                            $.each(data, function (index, val) {
+                                if (val.id !== null) {
+                                    $("#newtopics").append(`
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <h5 class="card-title">${val.title}</h5> <hr>
+                                        
+                                        <small> ${val.created_by} - ${val.created_at} </small> <br> <br>
+
+                                        <p class="card-text">${val.content}</p> <hr>
+                                        <a href="post/${val.id}/${val.title.replace(/ /g, "-").toLowerCase()}" class="btn btn-primary" style="float: right;"> 
+                                            Komentar
+                                        </a>
+                                        <p>${val.views} tayangan</p>
+                                      </div>
+                                    </div>
+                                `);
+                                }
+                            });
+                        }
+                    });
+                }
+                newtopics();
         });
     </script>
 </body>
