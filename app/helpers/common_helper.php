@@ -2,6 +2,51 @@
     exit('No direct script access allowed');
 }
 
+if (!function_exists('sometime_ago')) {
+    function sometime_ago($timestamp) {
+        $now        = time(); // Waktu saat ini dalam format timestamp
+        $difference = $now - $timestamp; // Selisih waktu
+
+        if ($difference < 60) {
+            if ($difference <= 1) {
+                return "baru saja";
+            } else {
+                return $difference . " detik yang lalu";
+            }
+        } elseif ($difference < 3600) {
+            $minutes = floor($difference / 60);
+            if ($minutes == 1) {
+                return "1 menit yang lalu";
+            } else {
+                return $minutes . " menit yang lalu";
+            }
+        } elseif ($difference < 86400) {
+            $hours = floor($difference / 3600);
+            if ($hours == 1) {
+                return "1 jam yang lalu";
+            } else {
+                return $hours . " jam yang lalu";
+            }
+        } elseif ($difference < 2592000) { // 30 hari dalam detik
+            $days = floor($difference / 86400);
+            if ($days == 1) {
+                return "1 hari yang lalu";
+            } else {
+                return $days . " hari yang lalu";
+            }
+        } elseif ($difference < 31536000) { // 365 hari dalam detik
+            $months = floor($difference / 2592000);
+            if ($months == 1) {
+                return "1 bulan yang lalu";
+            } else {
+                return $months . " bulan yang lalu";
+            }
+        } else {
+            return "1 tahun yang lalu";
+        }
+    }
+}
+
 if (!function_exists('checklogin')) {
     function checklogin()
     {
